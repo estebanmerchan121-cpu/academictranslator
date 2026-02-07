@@ -1,9 +1,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { AcademicCategory, SubContext, Language, Message, ChatState } from './types.ts';
-import ContextSelector from './components/ContextSelector.tsx';
-import ChatBubble from './components/ChatBubble.tsx';
-import { geminiService } from './services/geminiService.ts';
+import { AcademicCategory, SubContext, Language, Message, ChatState } from './types';
+import ContextSelector from './components/ContextSelector';
+import ChatBubble from './components/ChatBubble';
+import { geminiService } from './services/geminiService';
 
 const STORAGE_KEY = 'academic_translator_state';
 
