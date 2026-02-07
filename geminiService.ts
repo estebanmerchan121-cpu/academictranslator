@@ -7,9 +7,16 @@ export class GeminiService {
   private ai: GoogleGenAI;
 
   constructor() {
-    // Usamos import.meta.env para que Netlify lea la variable de entorno en el navegador
+    // Obtenemos la llave de las variables de entorno de Vite
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    this.ai = new GoogleGenAI(apiKey);
+    
+    // Verificación de seguridad para que no se rompa la app si no hay llave
+    if (!apiKey) {
+      console.error("Error: VITE_GEMINI_API_KEY no está configurada en Netlify");
+      this.ai = new GoogleGenAI("NO_KEY"); 
+    } else {
+      this.ai = new GoogleGenAI(apiKey);
+    }
   }
 
   async translateAcademic(
