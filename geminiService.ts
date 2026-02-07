@@ -17,7 +17,6 @@ export class GeminiService {
       this.ai = new GoogleGenAI(apiKey);
     }
   }
-  // ... resto del código igual ...
 
   async translateAcademic(
     text: string, 
