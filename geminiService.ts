@@ -1,18 +1,18 @@
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { AcademicCategory, SubContext, Language, TranslationResult } from "./types";
 
 export class GeminiService {
   private ai: GoogleGenAI;
 
   constructor() {
-    // Intentamos leer la variable de todas las formas posibles
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.VITE_GOOGLE_AI_KEY || "";
-
-    // Si no hay llave, cargamos una falsa para que la página NO se ponga en blanco
+    // Intentamos obtener la clave de las dos formas posibles en Netlify/Vite
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.VITE_GOOGLE_AI_KEY;
+    
     if (!apiKey) {
-      console.warn("⚠️ No se encontró API KEY. La app cargará pero no traducirá.");
-      this.ai = new GoogleGenAI("CLAVE_PENDIENTE"); 
+      console.error("ERROR CRÍTICO: No se encontró la API Key. Verifica las variables en Netlify.");
+      // Inicializamos con un string vacío para evitar que la app se rompa al cargar
+      this.ai = new GoogleGenAI("SIN_CLAVE");
     } else {
       this.ai = new GoogleGenAI(apiKey);
     }
